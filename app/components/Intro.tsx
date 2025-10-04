@@ -2,7 +2,7 @@ import React from 'react'
 
 const Intro = () => {
   return (
-    <div>Intro</div>
+    <div>A short intro or instructions for the app on the home page.</div>
   )
 }
 

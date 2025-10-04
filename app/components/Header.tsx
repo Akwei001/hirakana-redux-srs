@@ -2,7 +2,7 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div>Header</div>
+    <div>A reusable header for branding, navigation, or page titles.</div>
   )
 }
 
