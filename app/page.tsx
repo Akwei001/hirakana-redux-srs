@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-   <div className="bg-background min-h-screen flex flex-col items-center justify-center p-8">
+<div className="bg-background min-h-screen flex flex-col items-center justify-center p-8">
   <div className="bg-card rounded-xl shadow-lg p-8 w-full max-w-md border border-border">
     <h1 className="text-3xl font-bold text-foreground mb-2">Test Card</h1>
     <p className="mb-4 text-muted-foreground">Hello Tailwind + ShadCN + Custom CSS!</p>
