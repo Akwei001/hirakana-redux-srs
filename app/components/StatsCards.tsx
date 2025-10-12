@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
-import { Progress } from "@/components/ui/progress";
+// import { Progress } from "@/components/ui/progress";
 import { BookOpen, Flame, Archive } from "lucide-react";
 
 const StatsCards = () => {
@@ -38,7 +38,8 @@ const StatsCards = () => {
           <p className="text-xs text-muted-foreground">learning sets</p>
         </CardContent>
       </Card>
-        
+              {/* Active Decks Card */}
+     
 
     </div>
   )
