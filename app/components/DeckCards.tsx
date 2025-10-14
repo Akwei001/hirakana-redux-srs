@@ -44,7 +44,7 @@ export function DeckCards() {
                 <span className="text-sm text-muted-foreground">Progress</span>
                 <span className="text-sm font-medium">{deck.progress}%</span>
               </div>
-              <Progress value={deck.progress} className="h-2 bg-accent" />
+              <Progress value={deck.progress} className="h-2 [&>div]:bg-accent bg-secondary" />
             </div>
 
             {/* Streak and Study Button */}
@@ -63,3 +63,4 @@ export function DeckCards() {
     </div>
   );
 }
+ 
