@@ -1,9 +1,29 @@
  import React from 'react'
- 
- const StartQuizButton = () => {
-   return (
-     <div>The button that starts or navigates to the quiz.</div>
-   )
- }
- 
- export default StartQuizButton
+// StartQuizButton.tsx
+import { useDispatch } from 'react-redux';
+import { startQuiz } from '@/store/quizSlice';
+import { useRouter } from 'next/navigation';
+import { KanaChar } from '@/app/data/kana'; // Import your type
+import { Button } from '@/components/ui/button';
+
+type StartQuizButtonProps = {
+  deck: string;
+  cards: KanaChar[];
+};
+
+export default function StartQuizButton({ deck, cards }: StartQuizButtonProps ) {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleStartQuiz = () => {
+    dispatch(startQuiz({ deck, cards }));
+    router.push('/quiz'); // go to quiz page
+  };
+
+  return (
+    <Button onClick={handleStartQuiz}>
+      Start Quiz
+    </Button>
+  );
+}
+
