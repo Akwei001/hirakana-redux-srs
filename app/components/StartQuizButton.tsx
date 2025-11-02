@@ -1,3 +1,5 @@
+"use client"
+ 
  import React from 'react'
 // StartQuizButton.tsx
 import { useDispatch } from 'react-redux';
@@ -11,7 +13,7 @@ type StartQuizButtonProps = {
   cards: KanaChar[];
 };
 
-export default function StartQuizButton({ deck, cards }: StartQuizButtonProps ) {
+function StartQuizButton({ deck, cards }: StartQuizButtonProps ) {
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -27,3 +29,4 @@ export default function StartQuizButton({ deck, cards }: StartQuizButtonProps ) 
   );
 }
 
+export default StartQuizButton
