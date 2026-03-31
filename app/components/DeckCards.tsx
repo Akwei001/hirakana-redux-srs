@@ -1,9 +1,11 @@
 "use client"
+import {useRouter} from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
 export function DeckCards() {
+  const router = useRouter();
   const decks = [
     {
       name: "Hiragana",
@@ -54,7 +56,11 @@ export function DeckCards() {
                 <div className="text-2xl font-bold">{deck.streak}</div>
                 <div className="text-xs text-muted-foreground">Streak</div>
               </div>
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Button
+                className="bg-primary text-primary-foreground hover:bg-primary/90"
+                onClick={() => router.push("/quiz")}
+                disabled={deck.name !== "Hiragana"}
+              >
                 Study
               </Button>
             </div>
