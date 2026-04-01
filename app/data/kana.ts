@@ -4,6 +4,7 @@ export type KanaChar = {
   symbol: string;
   romaji: string;
   group: string;
+  skipInQuiz?: boolean;
 };
 
 // HIRAGANA
@@ -49,8 +50,8 @@ export const hiragana: KanaChar[] = [
   { symbol: "と", romaji: "to", group: "ta" },
   // D-row (diacritics)
   { symbol: "だ", romaji: "da", group: "da" },
-  { symbol: "ぢ", romaji: "ji", group: "da" }, // alt reading for 'ji'
-  { symbol: "づ", romaji: "zu", group: "da" }, // alt reading for 'zu'
+  { symbol: "ぢ", romaji: "ji", group: "da", skipInQuiz: true }, // alt reading for 'ji'
+  { symbol: "づ", romaji: "zu", group: "da", skipInQuiz: true }, // alt reading for 'zu'
   { symbol: "で", romaji: "de", group: "da" },
   { symbol: "ど", romaji: "do", group: "da" },
 
@@ -186,8 +187,8 @@ export const katakana: KanaChar[] = [
   { symbol: "ト", romaji: "to", group: "ta" },
   // D-row (diacritics)
   { symbol: "ダ", romaji: "da", group: "da" },
-  { symbol: "ヂ", romaji: "ji", group: "da" },
-  { symbol: "ヅ", romaji: "zu", group: "da" },
+  { symbol: "ヂ", romaji: "ji", group: "da", skipInQuiz: true },
+  { symbol: "ヅ", romaji: "zu", group: "da", skipInQuiz: true },
   { symbol: "デ", romaji: "de", group: "da" },
   { symbol: "ド", romaji: "do", group: "da" },
 

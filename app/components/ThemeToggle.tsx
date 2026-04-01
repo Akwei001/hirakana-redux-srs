@@ -1,5 +1,7 @@
 "use client"
 import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
@@ -12,12 +14,19 @@ export default function ThemeToggle() {
     }
   }, [isDark]);
 
+  const label = isDark ? "Switch to light mode" : "Switch to dark mode";
+
   return (
-    <button
-      className="px-4 py-2 rounded bg-card text-foreground border border-border"
+    <Button
+      type="button"
+      variant="outline"
+      size="icon"
+      aria-label={label}
+      title={label}
+      className="rounded-full bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60"
       onClick={() => setIsDark((v) => !v)}
     >
-      {isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-    </button>
+      {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
+    </Button>
   );
 }

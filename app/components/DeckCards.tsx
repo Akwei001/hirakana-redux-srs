@@ -3,6 +3,8 @@ import {useRouter} from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import StartQuizButton from './StartQuizButton';
+import { hiragana, katakana } from "@/app/data/kana";
 
 export function DeckCards() {
   const router = useRouter();
@@ -12,21 +14,24 @@ export function DeckCards() {
       learned: 21,
       total: 46,
       progress: 45,
-      streak: 3
+      streak: 3,
+      cards: hiragana,
     },
     {
       name: "Katakana", 
       learned: 9,
       total: 46,
       progress: 20,
-      streak: 1
+      streak: 1,
+      cards: katakana,
     },
     {
       name: "Japanese Vocabulary",
       learned: 65,
       total: 100,
       progress: 65,
-      streak: 7
+      streak: 7,
+      cards: [],
     }
   ];
 
@@ -51,18 +56,31 @@ export function DeckCards() {
             </div>
 
             {/* Streak and Study Button */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
               <div>
                 <div className="text-2xl font-bold">{deck.streak}</div>
                 <div className="text-xs text-muted-foreground">Streak</div>
               </div>
-              <Button
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
-                onClick={() => router.push("/quiz")}
-                disabled={deck.name !== "Hiragana"}
-              >
-                Study
-              </Button>
+
+              <div className="ml-auto flex items-center gap-2">
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => router.push("/quiz")}
+                  disabled={deck.name !== "Hiragana"}
+                >
+                  Study
+                </Button>
+
+                <StartQuizButton
+                  deck={deck.name}
+                  cards={deck.cards}
+                  disabled={deck.cards.length === 0}
+                  className="h-8 px-3"
+                >
+                  Start Quiz
+                </StartQuizButton>
+              </div>
             </div>
           </CardContent>
         </Card>
