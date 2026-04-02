@@ -1,15 +1,28 @@
 'use client'
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { hiragana } from "@/app/data/kana";
 
 
+const deck = hiragana.filter((card) => !card.skipInQuiz);
 
 export default function QuizPage() {
+  
+ const router = useRouter();
 
-
-  const [index, setIndex]         = useState(0);     // which card
+const [index, setIndex]         = useState(0);     // which card
 const [isFlipped, setIsFlipped] = useState(false); // answer showing?
 const [correct, setCorrect]     = useState(0);     // score tracker
+
+
+const currentCard = deck[index];
+
+const handleFlip = () => setIsFlipped(true);
+
+const handleAnswer () => {}
+
+
 
   return (
     <div className="space-y-2">
