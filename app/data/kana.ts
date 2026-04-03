@@ -280,3 +280,39 @@ export const katakana: KanaChar[] = [
   { symbol: "ピュ", romaji: "pyu", group: "combo" },
   { symbol: "ピョ", romaji: "pyo", group: "combo" }
 ];
+
+export type KanaCard = {
+  id: string;
+  kana: string;
+  romaji: string;
+};
+
+export const getHiraganaStudyDeck: KanaCard[] = [
+  { id: "a", kana: "あ", romaji: "a" },
+  { id: "i", kana: "い", romaji: "i" },
+  { id: "u", kana: "う", romaji: "u" },
+  { id: "e", kana: "え", romaji: "e" },
+  { id: "o", kana: "お", romaji: "o" },
+  { id: "ka", kana: "か", romaji: "ka" },
+  { id: "ki", kana: "き", romaji: "ki" },
+  { id: "ku", kana: "く", romaji: "ku" },
+  { id: "ke", kana: "け", romaji: "ke" },
+  { id: "ko", kana: "こ", romaji: "ko" },
+];
+
+// --- Utility functions ---
+
+function shuffleArray(array: KanaChar[]): KanaChar[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+export function getStudyDeck(limit?: number): KanaChar[] {
+  const active = hiragana.filter((card) => !card.skipInQuiz);
+  const shuffled = shuffleArray(active);
+  return limit ? shuffled.slice(0, limit) : shuffled;
+}

@@ -1,47 +1,64 @@
-'use client'
+"use client";
 
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { hiragana } from "@/app/data/kana";
-
-
-const deck = hiragana.filter((card) => !card.skipInQuiz);
+import { useRouter } from "next/navigation";
+import { getStudyDeck } from "@/app/data/kana";
+import QuizProgressBar from "@/app/components/QuizProgressBar";
+import FlipAnswerButton from "@/app/components/FlipAnswerButton";
+import ConfidenceButtons from "@/app/components/ConfidenceButtons";
 
 export default function QuizPage() {
-  
- const router = useRouter();
+  const router = useRouter();
+  const [studyDeck] = useState(() => getStudyDeck());
+  const [index, setIndex] = useState(0);
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [correct, setCorrect] = useState(0);
 
-const [index, setIndex]         = useState(0);     // which card
-const [isFlipped, setIsFlipped] = useState(false); // answer showing?
-const [correct, setCorrect]     = useState(0);     // score tracker
+  const currentCard = studyDeck[index];
 
+  const handleFlip = () => setIsFlipped(true);
 
-const currentCard = deck[index];
+  const handleAnswer = (rating: "knew" | "unsure" | "forgot") => {
+    const nextCorrect = rating === "knew" ? correct + 1 : correct;
+    const nextIndex = index + 1;
 
-const handleFlip = () => setIsFlipped(true);
-
-const handleAnswer () => {}
-
-
+    if (nextIndex >= studyDeck.length) {
+      localStorage.setItem(
+        "lastResult",
+        JSON.stringify({
+          correct: nextCorrect,
+          total: studyDeck.length,
+          deck: "Hiragana",
+        })
+      );
+      router.push("/complete");
+    } else {
+      setIndex(nextIndex);
+      setIsFlipped(false);
+      setCorrect(nextCorrect);
+    }
+  };
 
   return (
-    <div className="space-y-2">
-      <div>QuizPage</div>
-      <div className="text-sm text-muted-foreground">
-        Card {index + 1} · {isFlipped ? "Answer" : "Prompt"} · Correct {correct}
-      </div>
-      <div className="flex gap-2">
-        <button className="underline" onClick={() => setIsFlipped((v) => !v)}>
-          Flip
-        </button>
-        <button className="underline" onClick={() => setIndex((v) => v + 1)}>
-          Next
-        </button>
-        <button className="underline" onClick={() => setCorrect((v) => v + 1)}>
-          Mark Correct
-        </button>
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
+      <div className="w-full max-w-md space-y-8">
+        <QuizProgressBar current={index + 1} total={studyDeck.length} />
+
+        <div className="flex flex-col items-center gap-4">
+          <div className="text-8xl font-bold">{currentCard.symbol}</div>
+
+          {isFlipped && (
+            <div className="text-3xl text-muted-foreground font-medium">
+              {currentCard.romaji}
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col items-center gap-4">
+          <FlipAnswerButton onFlip={handleFlip} isFlipped={isFlipped} />
+          <ConfidenceButtons onAnswer={handleAnswer} isVisible={isFlipped} />
+        </div>
       </div>
     </div>
-  )
+  );
 }
-

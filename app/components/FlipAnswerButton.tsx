@@ -1,9 +1,12 @@
-import React from 'react'
+import { Button } from "@/components/ui/button";
+type Props = { onFlip: () => void; isFlipped: boolean };
 
-const FlipAnswerButton = () => {
+const FlipAnswerButton = ({ onFlip, isFlipped }: Props) => {
+  if (isFlipped) return null;
   return (
-    <div>Button to flip/reveal the answer on the flashcard.</div>
-  )
-}
-
-export default FlipAnswerButton
+    <Button onClick={onFlip} className="w-full" size="lg">
+      Reveal Answer
+    </Button>
+  );
+};
+export default FlipAnswerButton;
