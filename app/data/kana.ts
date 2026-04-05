@@ -311,8 +311,7 @@ function shuffleArray(array: KanaChar[]): KanaChar[] {
   return shuffled;
 }
 
-export function getStudyDeck(limit?: number): KanaChar[] {
-  const active = hiragana.filter((card) => !card.skipInQuiz);
-  const shuffled = shuffleArray(active);
-  return limit ? shuffled.slice(0, limit) : shuffled;
+export function getStudyDeck(limit: number = 5) {
+  const activeCards = hiragana.filter((card) => !card.skipInQuiz);
+  return shuffleArray(activeCards).slice(0, limit);
 }
