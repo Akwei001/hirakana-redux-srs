@@ -17,8 +17,13 @@ export default function CompletePage() {
   useEffect(() => {
     const lastResult = localStorage.getItem("lastResult");
 
-    if (lastResult) {
-      setResult(JSON.parse(lastResult));
+    if (!lastResult) return;
+
+    try {
+      const parsedResult: QuizResult = JSON.parse(lastResult);
+      setResult(parsedResult);
+    } catch (error) {
+      console.error("Failed to parse lastResult from localStorage:", error);
     }
   }, []);
 
@@ -45,8 +50,6 @@ export default function CompletePage() {
     );
   }
 
-  console.log(result);
-
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-6">
       <Card className="w-full max-w-md text-center">
@@ -60,6 +63,22 @@ export default function CompletePage() {
           <p className="text-muted-foreground">
             Deck: {result.deck}
           </p>
+
+          <div className="flex flex-col gap-3 pt-2">
+            <button
+              onClick={() => router.push("/quiz")}
+              className="px-4 py-2 rounded-md bg-primary text-primary-foreground"
+            >
+              Study Again
+            </button>
+
+            <button
+              onClick={() => router.push("/")}
+              className="px-4 py-2 rounded-md border"
+            >
+              Back Home
+            </button>
+          </div>
         </CardContent>
       </Card>
     </div>
