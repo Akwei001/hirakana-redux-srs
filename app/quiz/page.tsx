@@ -16,37 +16,34 @@ export default function QuizPage() {
 
   const currentCard = studyDeck[index];
 
-  if (!currentCard) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-6">
-        <p className="text-muted-foreground">No cards available.</p>
-      </div>
-    );
-  }
-
   const handleFlip = () => setIsFlipped(true);
 
   const handleAnswer = (rating: "knew" | "unsure" | "forgot") => {
     const nextCorrect = rating === "knew" ? correct + 1 : correct;
     const nextIndex = index + 1;
-  
-    setCorrect(nextCorrect);
-  
+
     if (nextIndex >= studyDeck.length) {
-      localStorage.setItem(
-        "lastResult",
-        JSON.stringify({
-          correct: nextCorrect,
-          total: studyDeck.length,
-          deck: "Hiragana",
-        })
-      );
+      // try/catch here because localStorage can fail in private browsing
+      // or when storage is full — we don't want that to block navigation
+      try {
+        localStorage.setItem(
+          "lastResult",
+          JSON.stringify({
+            correct: nextCorrect,
+            total: studyDeck.length,
+            deck: "Hiragana",
+          })
+        );
+      } catch (error) {
+        console.warn("Could not save result to localStorage:", error);
+      }
+
       router.push("/complete");
-      return;
+    } else {
+      setIndex(nextIndex);
+      setIsFlipped(false);
+      setCorrect(nextCorrect);
     }
-  
-    setIndex(nextIndex);
-    setIsFlipped(false);
   };
 
   return (

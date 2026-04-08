@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 type QuizResult = {
   correct: number;
@@ -38,12 +39,12 @@ export default function CompletePage() {
             <p className="text-muted-foreground">
               Finish a quiz first to see your results here.
             </p>
-            <button
+            <Button
               onClick={() => router.push("/")}
               className="px-4 py-2 rounded-md bg-primary text-primary-foreground"
             >
               Go Home
-            </button>
+            </Button>
           </CardContent>
         </Card>
       </div>
@@ -65,12 +66,12 @@ export default function CompletePage() {
           </p>
 
           <div className="flex flex-col gap-3 pt-2">
-            <button
+            <Button
               onClick={() => router.push("/quiz")}
               className="px-4 py-2 rounded-md bg-primary text-primary-foreground"
             >
               Study Again
-            </button>
+            </Button>
 
             <button
               onClick={() => router.push("/")}
