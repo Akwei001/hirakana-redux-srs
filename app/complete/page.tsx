@@ -73,12 +73,12 @@ export default function CompletePage() {
               Study Again
             </Button>
 
-            <button
+            <Button
               onClick={() => router.push("/")}
               className="px-4 py-2 rounded-md border"
             >
               Back Home
-            </button>
+            </Button>
           </div>
         </CardContent>
       </Card>
