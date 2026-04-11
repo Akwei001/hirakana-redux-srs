@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hira-Kana Redux
+
+A Japanese kana study app built with Next.js and React.  
+This project focuses on a simple, testable spaced-repetition-style quiz flow for practicing hiragana.
+
+## Overview
+
+Hira-Kana Redux is a portfolio project designed to show a clean learning flow, practical state handling, basic persistence, and room for future SRS improvements.
+
+Current MVP flow:
+- Start a study session
+- Review a limited shuffled hiragana deck
+- Flip a card to reveal the answer
+- Mark confidence level
+- See the final score on the completion page
+
+## Features
+
+- Hiragana quiz flow with a limited study deck
+- Randomised card order per session
+- Quiz completion screen with score summary
+- Progress bar during study sessions
+- Result persistence with localStorage
+- Reusable UI components built with shadcn/ui
+
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript / JavaScript
+- Tailwind CSS
+- shadcn/ui
+- localStorage for basic persistence
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js
+- npm
+
+### Installation
 
 ```bash
+git clone https://github.com/Akwei001/hirakana-redux-srs.git
+cd hirakana-redux-srs
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open `http://localhost:3000` in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Open the app from the dashboard/start screen.
+2. Start a hiragana quiz session.
+3. Flip each card to reveal the romaji.
+4. Rate your confidence.
+5. Review your score on the completion page.
 
-## Learn More
+## Testing
 
-To learn more about Next.js, take a look at the following resources:
+Add your current test commands here when ready, for example:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run test
+npm run cypress:open
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+If tests are still being added, say that clearly:
+- Unit and E2E tests are planned as part of the next milestone.
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+app/
+  complete/
+  components/
+  data/
+  quiz/
+components/
+  ui/
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `app/quiz` contains the core study flow.
+- `app/complete` displays the saved quiz result.
+- `app/data` stores kana deck data and deck helpers.
+- `components/ui` contains shared UI primitives.
+
+## Architecture Notes
+
+The current MVP uses local component state for quiz flow and `localStorage` for basic result persistence.  
+This keeps the initial implementation simple while leaving room for Redux-based session and SRS logic in later iterations.
+
+## Future Improvements
+
+- Move session logic into Redux Toolkit
+- Add proper SRS progression rules
+- Add Cypress and Jest coverage
+- Expand deck support beyond the first hiragana set
+- Improve mobile polish and accessibility
+
+## Why I Built This
+
+I built Hira-Kana Redux as a portfolio project to practice shipping a realistic frontend product rather than just building isolated UI components.  
+The goal was to create a small but complete study app with a clear user flow, reusable components, and practical state management decisions.
